@@ -38,7 +38,7 @@ def ahorcado():
 				print()
 				adivino = True
 			if puntos != 0:
-				print("Bien. '" + opcion + "' esta dentro de la palabra secreta")
+				print("Bien. '" + opcion + "' aparece en " + str(puntos) + " espacios")
 				continue
 			else:
 				print("Sigue intentandolo. '" + opcion + "' no esta dentro de la palabra secreta")
@@ -55,12 +55,8 @@ def salir():
 	print("(2): Salir")
 	opcion = input()
 	return opcion
-	
-
 
 ahorcado()
-
-
 while True:
 	salida = salir()
 	if salida == "1":
@@ -69,8 +65,3 @@ while True:
 		break
 	else:
 		print("Ingrese una opcion valida")
-
-
-				
-		
-	
