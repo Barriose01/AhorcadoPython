@@ -11,28 +11,30 @@ def ahorcado():
 	espacios = [None] * len(palabra)
 	for i in range(len(espacios)):
 		espacios[i] = "_"
-		
 	vidas = 6
 	while(vidas > 0 and adivino == False):
 		print("\nTrate de adivinar la palabra. Tiene " + str(vidas) + " vidas")
 		print("Ingrese una letra o la palabra completa")
-		print(espacios)
+		print("Ingrese el numero cero (0) en cualquier momento para salir")
+		print("\n" + str(espacios))
 		print()
 		puntos = 0
-		
-		opcion = input()
-		if(len(opcion) > 1):
+		opcion = input().lower().strip()
+		if opcion == "0":
+			adivino = "salir"
+		elif(len(opcion) > 1):
 			if(opcion == palabra):
 				adivino = True
 			else:
-				print("'" + opcion + "' no es la palabra secreta. Sigue intentandolo")
-				vidas -=1	
+				vidas -=1
+				if vidas != 0:
+					print("'" + opcion + "' no es la palabra secreta. Sigue intentandolo")
+					
 		else:
 			for i in range(len(espacios)):
 				if opcion == palabra[i]:
 					espacios[i] = opcion
-					puntos +=1
-					
+					puntos +=1	
 			if "_" not in espacios:
 				print(espacios)
 				print()
@@ -41,22 +43,24 @@ def ahorcado():
 				print("Bien. '" + opcion + "' aparece en " + str(puntos) + " espacios")
 				continue
 			else:
-				print("Sigue intentandolo. '" + opcion + "' no esta dentro de la palabra secreta")
 				vidas -=1
+				if vidas != 0:
+					print("Sigue intentandolo. '" + opcion + "' no esta dentro de la palabra secreta")
 				
+	resultado(adivino,palabra)
+
+def resultado(adivino, palabra):
 	if adivino == True:
 		print("\nFelicitaciones!, la palabra era '" + palabra + "'")
-	else:
+	elif adivino == False:
 		print("\nLo siento. No adivinaste. La palabra era '" + palabra + "'")
-				
 			
 def salir():
-	print("(1): Volver a jugar")
+	print("(1): Jugar")
 	print("(2): Salir")
 	opcion = input()
 	return opcion
-
-ahorcado()
+	
 while True:
 	salida = salir()
 	if salida == "1":
